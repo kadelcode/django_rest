@@ -1,12 +1,18 @@
+from re import search
 from rest_framework import serializers
 from .models import Author, Book
 
 class BookSerializer(serializers.ModelSerializer):
+    search_url = serializers.SerializerMethodField('get_search_url')
     # Serialize the books
+
 
     class Meta:
         model = Book
-        fields = ('id', 'title', 'isbn','author')
+        fields = ('id', 'title', 'isbn','author','search_url')
+
+    def get_search_url(self,obj):
+        return "http://www.isbnsearch.org/isbn/{}".format(obj.isbn)
 
 class AuthorSerializer(serializers.ModelSerializer):
     # Serializing all the Authors
