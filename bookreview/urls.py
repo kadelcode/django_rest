@@ -2,5 +2,5 @@ from django.urls import path
 from .views import AuthorView
 
 urlpatterns = [
-    path('', AuthorView.as_view(), name="authorapiview"),
+    path('authors/', AuthorView.as_view(), name="authorapiview"),
 ]
